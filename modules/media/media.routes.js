@@ -1,0 +1,15 @@
+import { Router } from "express";
+
+import { createMedia, deleteMedia, listMedia, updateMedia } from "./media.controller.js";
+import { validateSchema } from "../../middleware/validator.middleware.js";
+import { mediaSchema } from "./media.schema.js";
+
+const router = Router();
+
+/** Medias **/
+router.get("/", listMedia);
+router.post("/", validateSchema(mediaSchema), createMedia);
+router.put("/", validateSchema(mediaSchema), updateMedia);
+router.delete("/", deleteMedia);
+
+export default router;
