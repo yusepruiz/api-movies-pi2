@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createGender, updateGender } from "./gender.controller.js";
+import { createGender, updateGender as patchGender } from "./gender.controller.js";
 import { validateSchema } from "../../middleware/validator.middleware.js";
 import { genderSchema } from "./gender.schema.js";
 
@@ -7,6 +7,6 @@ const router = Router();
 
 /** Géneros **/
 router.post("/", validateSchema(genderSchema), createGender);
-router.put("/", validateSchema(genderSchema), updateGender);
+router.patch("/:id", validateSchema(genderSchema.partial()), patchGender);
 
 export default router;

@@ -7,6 +7,6 @@ const router = Router();
 
 /** Productora **/
 router.post("/", validateSchema(producerSchema), createProducer);
-router.put("/", validateSchema(producerSchema), updateProducer);
+router.patch("/:id", validateSchema(producerSchema.partial()), updateProducer);
 
 export default router;

@@ -7,9 +7,14 @@
  * @param {string} slogan 
  * @param {string} description 
  */
-export const createProducer = (name, state, slogan, description) => {
+export const createProducer = async (name, state, slogan, description) => {
     try {
-        const query = "";
+        const [result] = await pool.getPool().query(
+            'INSERT INTO Producer (name, state, slogan, description, creation_date, update_date) VALUES (?, ?, ?, ?, NOW(), NOW())',
+            [name, state, slogan, description]
+        );
+
+        return result.affectedRows;
     } catch (error) {
         console.error("Error al crear la productora");
     }
@@ -22,9 +27,14 @@ export const createProducer = (name, state, slogan, description) => {
  * @param {string} slogan 
  * @param {string} description 
  */
-export const updateProducer = (name, state, slogan, description) => {
+export const updateProducer = async (id, setClause, values) => {
     try {
-        const query = "";
+        const [result] = await pool.getPool().query(
+            `UPDATE Producer SET ${setClause}, update_date = NOW() WHERE id = ?`,
+            [...values, id]
+        );
+
+        return result.affectedRows;
     } catch (error) {
         console.error("Error al actualizar la productora");
     }

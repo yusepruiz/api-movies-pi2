@@ -7,15 +7,23 @@ import { createProducer as createProducerModel, updateProducer as updateProducer
  * @param {Request} req 
  * @param {Response} res 
  */
-export const createProducer = (req, res) => {
+export const createProducer = async (req, res) => {
     try {
         const { name, state, slogan, description } = req.body;
 
-        createProducerModel(name, state, slogan, description);
+        const affectedRows = await createProducerModel(name, state, slogan, description);
 
-        console.log("Creando productora");
+        if (affectedRows === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "Productora no encontrada",
+                submit: false
+            });
+        }
+
         res.status(201).json({
-            message: "Productora creada exitosamente"
+            message: "Productora creada exitosamente",
+            affectedRows: affectedRows,
+            submit: true
         });
     } catch (error) {
         console.error("Error al crear la productora");
@@ -31,15 +39,31 @@ export const createProducer = (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-export const updateProducer = (req, res) => {
+export const updateProducer = async (req, res) => {
+    const fields = req.body;
+    const id = req.params.id;
+
     try {
-        const { name, state, slogan, description } = req.body;
 
-        updateProducerModel(name, state, slogan, description);
+        const keys = Object.keys(fields).filter(key => fields[key] !== undefined);
+        if (keys.length === 0) return res.status(400).json({ msg: "No se enviaron datos para actualizar" });
 
-        console.log("Actualizando productora");
+        const setClause = keys.map(key => `${key} = ?`).join(', ');
+        const values = keys.map(key => fields[key]);
+
+        const affectedRows = await updateProducerModel(id, setClause, values);
+
+        if (affectedRows === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "Productora no encontrada",
+                submit: false
+            });
+        }
+
         res.status(200).json({
-            message: "Productora actualizada exitosamente"
+            message: "Productora actualizada exitosamente",
+            affectedRows: affectedRows,
+            submit: true
         });
     } catch (error) {
         console.error("Error al actualizar la productora");

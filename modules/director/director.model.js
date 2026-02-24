@@ -1,3 +1,4 @@
+import pool from '../../database/config.js';
 /** Director **/
 
 /**
@@ -5,10 +6,15 @@
  * @param {boolean} state 
  * @param {string} description 
  */
-export const createDirector = (state, description) => {
+export const createDirector = async (name, state) => {
     try {
-        console.log({ state, description });
-        const query = "";
+        const [result] = await pool.getPool().query(
+            'INSERT INTO Director (name, state, creation_date, update_date) VALUES (?, ?, NOW(), NOW())',
+            [name, state]
+        );
+
+        return result.affectedRows;
+
     } catch (error) {
         console.error("Error al crear el director");
     }
@@ -19,10 +25,17 @@ export const createDirector = (state, description) => {
  * @param {string} description 
  * @param {boolean} state 
  */
-export const updateDirector = (description, state) => {
+export const patchDirector = async (id, setClause, values) => {
     try {
-        const query = "";
+
+        const [result] = await pool.getPool().query(
+            `UPDATE Director SET ${setClause}, update_date = NOW() WHERE id = ?`,
+            [...values, id]
+        );
+
+        return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el director");
+        console.error("Error al actualizar el director - model", error);
     }
 }
+

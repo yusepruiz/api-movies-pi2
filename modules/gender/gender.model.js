@@ -1,3 +1,4 @@
+import pool from '../../database/config.js';
 /*** Géneros ***/
 
 /**
@@ -6,10 +7,14 @@
  * @param {string} state 
  * @param {string} description 
  */
-export const createGender = (name, state, description) => {
+export const createGender = async (name, state, description) => {
     try {
-        const query = "";
+        const [result] = await pool.getPool().query(
+            'INSERT INTO Gender (name, state, description, creation_date, update_date) VALUES (?, ?, ?, NOW(), NOW())',
+            [name, state, description]
+        );
 
+        return result.affectedRows;
     } catch (error) {
         console.error("Error al crear el género");
     }
@@ -21,10 +26,15 @@ export const createGender = (name, state, description) => {
  * @param {string} state 
  * @param {string} description 
  */
-export const updateGender = (name, state, description) => {
+export const patchGender = async (id, setClause, values) => {
     try {
-        const query = "";
+        const [result] = await pool.getPool().query(
+            `UPDATE Gender SET ${setClause}, update_date = NOW() WHERE id = ?`,
+            [...values, id]
+        );
+
+        return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el género");
+        console.error("Error al actualizar el género", error);
     }
 }
