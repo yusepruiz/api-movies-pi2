@@ -9,7 +9,7 @@ const router = Router();
 /** Medias **/
 router.get("/", listMedia);
 router.post("/", validateSchema(mediaSchema), createMedia);
-router.put("/", validateSchema(mediaSchema), updateMedia);
-router.delete("/", deleteMedia);
+router.patch("/:id", validateSchema(mediaSchema.partial()), updateMedia);
+router.delete("/:id", deleteMedia);
 
 export default router;

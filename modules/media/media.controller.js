@@ -1,4 +1,4 @@
-import { createMedia as createMediaModel, updateMedia as updateMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
+import { createMedia as createMediaModel, patchMedia as patchMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
 
 /** Media */
 
@@ -7,15 +7,19 @@ import { createMedia as createMediaModel, updateMedia as updateMediaModel, delet
  * @param {Request} req 
  * @param {Response} res 
  */
-export const createMedia = (req, res) => {
+export const createMedia = async (req, res) => {
     try {
-        createMediaModel(req.body);
-        console.log("Creando media");
+        const affectedRows = await createMediaModel(req.body);
+
+        if (affectedRows === 0) {
+            return res.status(400).json({ message: "No se pudo crear el media" });
+        }
+        
         res.status(201).json({
             message: "Media creado exitosamente"
         });
     } catch (error) {
-        console.error("Error al crear el media");
+        console.error("Error al crear el media", error);
         res.status(500).json({
             message: "Error al crear el media",
             error: error.message
@@ -24,19 +28,33 @@ export const createMedia = (req, res) => {
 };
 
 /**
- * Actualizar media
+ * Actualizar media (PATCH)
  * @param {Request} req 
  * @param {Response} res 
  */
-export const updateMedia = (req, res) => {
+export const updateMedia = async (req, res) => {
     try {
-        updateMediaModel(req.body);
-        console.log("Actualizando media");
+        const { id } = req.params;
+        const body = req.body;
+
+        if (Object.keys(body).length === 0) {
+            return res.status(400).json({ message: "No hay campos para actualizar" });
+        }
+
+        const setClause = Object.keys(body).map(key => `${key} = ?`).join(', ');
+        const values = Object.values(body);
+
+        const affectedRows = await patchMediaModel(id, setClause, values);
+
+        if (affectedRows === 0 || affectedRows === undefined) {
+            return res.status(404).json({ message: "Media no encontrado" });
+        }
+
         res.status(200).json({
             message: "Media actualizado exitosamente"
         });
     } catch (error) {
-        console.error("Error al actualizar el media");
+        console.error("Error al actualizar el media", error);
         res.status(500).json({
             message: "Error al actualizar el media",
             error: error.message
@@ -49,18 +67,21 @@ export const updateMedia = (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-export const deleteMedia = (req, res) => {
+export const deleteMedia = async (req, res) => {
     try {
         const { id } = req.params;
 
-        deleteMediaModel(id);
+        const affectedRows = await deleteMediaModel(id);
 
-        console.log("Eliminando media");
+        if (affectedRows === 0 || affectedRows === undefined) {
+            return res.status(404).json({ message: "Media no encontrado o ya eliminado" });
+        }
+
         res.status(200).json({
             message: "Media eliminado exitosamente"
         });
     } catch (error) {
-        console.error("Error al eliminar el media");
+        console.error("Error al eliminar el media", error);
         res.status(500).json({
             message: "Error al eliminar el media",
             error: error.message
@@ -73,16 +94,17 @@ export const deleteMedia = (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-export const listMedia = (req, res) => {
+export const listMedia = async (req, res) => {
     try {
-        listMediaModel();
+        const media = await listMediaModel();
 
-        console.log("Listando media");
-        res.status(200).json({
-            message: "Media listado exitosamente"
-        });
+        if (media.length === 0 || media === undefined) {
+            return res.status(404).json({ message: "Media no encontrado" });
+        }
+
+        res.status(200).json(media);
     } catch (error) {
-        console.error("Error al listar el media");
+        console.error("Error al listar el media", error);
         res.status(500).json({
             message: "Error al listar el media",
             error: error.message
