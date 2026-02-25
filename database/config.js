@@ -40,6 +40,15 @@ class Database {
     getPool() {
         return this.pool;
     }
+
+    /**
+     * Ejecuta una consulta SQL directamente usando el pool
+     * @param {string} sql 
+     * @param {Array} params 
+     */
+    async query(sql, params) {
+        return await this.pool.query(sql, params);
+    }
 }
 
 const db = new Database();

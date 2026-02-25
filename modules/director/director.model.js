@@ -8,7 +8,7 @@ import pool from '../../database/config.js';
  */
 export const createDirector = async (name, state) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             'INSERT INTO Director (name, state, creation_date, update_date) VALUES (?, ?, NOW(), NOW())',
             [name, state]
         );
@@ -29,7 +29,7 @@ export const createDirector = async (name, state) => {
 export const patchDirector = async (id, setClause, values) => {
     try {
 
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             `UPDATE Director SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]
         );

@@ -7,7 +7,7 @@
  */
 export const createType = async (name, description) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             'INSERT INTO Type (name, description, creation_date, update_date) VALUES (?, ?, NOW(), NOW())',
             [name, description]
         );
@@ -26,7 +26,7 @@ export const createType = async (name, description) => {
  */
 export const patchType = async (id, setClause, values) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             `UPDATE Type SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]
         );

@@ -8,6 +8,6 @@ const router = Router();
 
 /** Director **/
 router.post("/", validateSchema(directorSchema), createDirector);
-router.patch("/:id", validateSchema(directorSchema), patchDirector);
+router.patch("/:id", validateSchema(directorSchema.partial()), patchDirector);
 
 export default router;

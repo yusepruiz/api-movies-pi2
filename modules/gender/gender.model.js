@@ -9,7 +9,7 @@ import pool from '../../database/config.js';
  */
 export const createGender = async (name, state, description) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             'INSERT INTO Gender (name, state, description, creation_date, update_date) VALUES (?, ?, ?, NOW(), NOW())',
             [name, state, description]
         );
@@ -28,7 +28,7 @@ export const createGender = async (name, state, description) => {
  */
 export const patchGender = async (id, setClause, values) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             `UPDATE Gender SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]
         );

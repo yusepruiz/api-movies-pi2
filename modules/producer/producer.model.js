@@ -9,7 +9,7 @@
  */
 export const createProducer = async (name, state, slogan, description) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             'INSERT INTO Producer (name, state, slogan, description, creation_date, update_date) VALUES (?, ?, ?, ?, NOW(), NOW())',
             [name, state, slogan, description]
         );
@@ -28,7 +28,7 @@ export const createProducer = async (name, state, slogan, description) => {
  */
 export const updateProducer = async (id, setClause, values) => {
     try {
-        const [result] = await pool.getPool().query(
+        const [result] = await pool.query(
             `UPDATE Producer SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]
         );
