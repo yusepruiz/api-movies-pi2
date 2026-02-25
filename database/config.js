@@ -35,13 +35,6 @@ class Database {
     }
 
     /**
-     * Retorna el pool de conexiones
-     */
-    getPool() {
-        return this.pool;
-    }
-
-    /**
      * Ejecuta una consulta SQL directamente usando el pool
      * @param {string} sql 
      * @param {Array} params 
