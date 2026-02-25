@@ -22,10 +22,9 @@ export const createProducer = async (name, state, slogan, description) => {
 
 /**
  * Actualiza una productora existente en la base de datos
- * @param {string} name 
- * @param {string} state 
- * @param {string} slogan 
- * @param {string} description 
+ * @param {number} id
+ * @param {string} setClause
+ * @param {Array} values
  */
 export const updateProducer = async (id, setClause, values) => {
     try {

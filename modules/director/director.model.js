@@ -3,8 +3,8 @@ import pool from '../../database/config.js';
 
 /**
  * Crea un nuevo director en la base de datos
+ * @param {string} name 
  * @param {boolean} state 
- * @param {string} description 
  */
 export const createDirector = async (name, state) => {
     try {
@@ -22,8 +22,9 @@ export const createDirector = async (name, state) => {
 
 /**
  * Actualiza un director existente en la base de datos
- * @param {string} description 
- * @param {boolean} state 
+ * @param {number} id
+ * @param {string} setClause
+ * @param {Array} values
  */
 export const patchDirector = async (id, setClause, values) => {
     try {

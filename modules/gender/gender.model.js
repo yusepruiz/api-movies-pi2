@@ -22,9 +22,9 @@ export const createGender = async (name, state, description) => {
 
 /**
  * Actualiza un género existente en la base de datos
- * @param {string} name 
- * @param {string} state 
- * @param {string} description 
+ * @param {number} id
+ * @param {string} setClause
+ * @param {Array} values
  */
 export const patchGender = async (id, setClause, values) => {
     try {

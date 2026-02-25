@@ -20,9 +20,9 @@ export const createType = async (name, description) => {
 
 /**
  * Actualiza un tipo existente en la base de datos
- * @param {string} name 
- * @param {string} state 
- * @param {string} description 
+ * @param {number} id
+ * @param {string} setClause
+ * @param {Array} values
  */
 export const patchType = async (id, setClause, values) => {
     try {
