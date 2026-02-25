@@ -10,13 +10,13 @@ export const mediaSchema = z.object({
     synopsis: z.string({
         message: "La sinopsis debe ser un texto"
     }).min(1, "La sinopsis no puede estar vacía"),
-    url: z.string({
-        message: "La URL debe ser un texto"
+    urlMovie: z.string({
+        message: "La URL de la película debe ser un texto"
     }).url("Debe ser una URL válida"),
     image: z.string({
         message: "La imagen debe ser un texto"
     }).url("La imagen debe ser una URL válida"),
-    releaseYear: z.number({
+    yearRelease: z.number({
         message: "El año de estreno debe ser un número"
     }).int().min(1800, "Año no válido").max(new Date().getFullYear() + 10, "Año no válido"),
     gender: z.string({
@@ -31,7 +31,6 @@ export const mediaSchema = z.object({
     type: z.string({
         message: "El tipo debe ser un texto"
     }).min(1, "El tipo no puede estar vacío"),
-    // Estos campos suelen ser automáticos, pero se incluyen por si se envían
     creationDate: z.date().optional(),
     updateDate: z.date().optional()
 });
