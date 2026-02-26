@@ -18,16 +18,16 @@ export const mediaSchema = z.object({
     }).int().min(1800, "Año no válido").max(new Date().getFullYear() + 10, "Año no válido"),
     gender: z.number({
         message: "El género debe ser un número"
-    }).min(1, "El género no puede estar vacío"),
+    }).int(),
     director: z.number({
         message: "El director debe ser un número"
-    }).min(1, "El director no puede estar vacío"),
+    }).int(),
     producer: z.number({
         message: "La productora debe ser un número"
-    }).min(1, "La productora no puede estar vacía"),
+    }).int(),
     type: z.number({
         message: "El tipo debe ser un número"
-    }).min(1, "El tipo no puede estar vacío"),
+    }).int(),
     creationDate: z.date().optional(),
     updateDate: z.date().optional()
 });
