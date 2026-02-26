@@ -17,7 +17,7 @@ export const createProducer = async (name, state, slogan, description) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear la productora");
+        console.error("Error al crear la productora", error);
     }
 }
 

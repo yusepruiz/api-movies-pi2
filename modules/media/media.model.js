@@ -7,13 +7,13 @@ import pool from '../../database/config.js';
  * @param {object} body 
  */
 export const createMedia = async (body) => {
-    const { serial, title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type } = body;
+    const { itle, synopsis, urlMovie, image, yearRelease, gender, director, producer, type } = body;
 
-    const values = [serial, title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type];
+    const values = [title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type];
 
     try {
         const [result] = await pool.query(
-            'INSERT INTO Media (serial, title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
             values
         );
 
@@ -35,7 +35,7 @@ export const patchMedia = async (id, setClause, values) => {
             `UPDATE Media SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]
         );
-        
+
         return result.affectedRows;
     } catch (error) {
         console.error("Error al actualizar el media", error);
