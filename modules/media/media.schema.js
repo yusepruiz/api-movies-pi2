@@ -17,6 +17,7 @@ export const mediaSchema = z.object({
         message: "El año de estreno debe ser un número"
     }).int().min(1800, "Año no válido").max(new Date().getFullYear() + 10, "Año no válido"),
     gender: z.number({
+<<<<<<< HEAD
         message: "El género debe ser numérico"
     }).int(),
     director: z.number({
@@ -27,6 +28,18 @@ export const mediaSchema = z.object({
     }).int(),
     type: z.number({
         message: "El tipo debe ser numérico"
+=======
+        message: "El género debe ser un número"
+    }).int(),
+    director: z.number({
+        message: "El director debe ser un número"
+    }).int(),
+    producer: z.number({
+        message: "La productora debe ser un número"
+    }).int(),
+    type: z.number({
+        message: "El tipo debe ser un número"
+>>>>>>> 7148ba2401bcd6502aec2db5d8fe9b01023cb9de
     }).int(),
     creationDate: z.date().optional(),
     updateDate: z.date().optional()
