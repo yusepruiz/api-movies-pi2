@@ -28,7 +28,6 @@ export const createDirector = async (name, state) => {
  */
 export const patchDirector = async (id, setClause, values) => {
     try {
-
         const [result] = await pool.query(
             `UPDATE Director SET ${setClause}, update_date = NOW() WHERE id = ?`,
             [...values, id]

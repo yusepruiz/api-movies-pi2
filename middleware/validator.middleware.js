@@ -13,7 +13,6 @@ export const validateSchema = (schema) => (req, res, next) => {
                 message: "Error de validación",
                 // Usamos error.issues que es más seguro en versiones recientes de Zod
                 errors: error.issues.map(issue => (
-                    console.log("->", issue),
                     {
                         path: issue.path.join('.'),
                         message: issue.message
