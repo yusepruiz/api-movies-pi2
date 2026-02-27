@@ -24,7 +24,7 @@ class Server {
         this.producerPath = "/api/producer";
         this.typePath = "/api/type";
 
-        // this.connectDB();
+        this.connectDB();
         this.middlewares();
         this.routes();
     }
