@@ -7,19 +7,27 @@ import pool from '../../database/config.js';
  * @param {object} body 
  */
 export const createMedia = async (body) => {
+<<<<<<< HEAD
     const { title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type } = body;
+=======
+    const { title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id } = body;
+>>>>>>> 470d1f8aa8b5fcbe66897f7824679f76ca4d750c
 
-    const values = [title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type];
+    const values = [title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id];
 
     try {
         const [result] = await pool.query(
+<<<<<<< HEAD
             'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+=======
+            'INSERT INTO Media (title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+>>>>>>> 470d1f8aa8b5fcbe66897f7824679f76ca4d750c
             values
         );
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear el media");
+        console.error("Error al crear el media", error);
     }
 };
 

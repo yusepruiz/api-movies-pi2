@@ -1,4 +1,8 @@
 import { createMedia as createMediaModel, patchMedia as patchMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
+import { existsActiveDirector } from "../director/director.model.js";
+import { existsActiveProducer } from "../producer/producer.model.js";
+import { existsType } from "../type/type.model.js";
+import { existsActiveGender } from "../gender/gender.model.js";
 
 /** Media */
 
@@ -9,12 +13,28 @@ import { createMedia as createMediaModel, patchMedia as patchMediaModel, deleteM
  */
 export const createMedia = async (req, res) => {
     try {
+        const { director, producer, type, gender } = req.body;
+
+        // validations
+        if (!await existsActiveDirector(director)) {
+            return res.status(400).json({ message: "Director inválido o inactivo" });
+        }
+        if (!await existsActiveProducer(producer)) {
+            return res.status(400).json({ message: "Productora inválida o inactiva" });
+        }
+        if (!await existsType(type)) {
+            return res.status(400).json({ message: "Tipo de media no existe" });
+        }
+        if (!await existsActiveGender(gender)) {
+            return res.status(400).json({ message: "Género inválido o inactivo" });
+        }
+
         const affectedRows = await createMediaModel(req.body);
 
         if (affectedRows === 0) {
             return res.status(400).json({ message: "No se pudo crear el media" });
         }
-        
+
         res.status(201).json({
             message: "Media creado exitosamente"
         });
@@ -39,6 +59,20 @@ export const updateMedia = async (req, res) => {
 
         if (Object.keys(body).length === 0) {
             return res.status(400).json({ message: "No hay campos para actualizar" });
+        }
+
+        // validations only if corresponding fields are present
+        if (body.director !== undefined && !(await existsActiveDirector(body.director))) {
+            return res.status(400).json({ message: "Director inválido o inactivo" });
+        }
+        if (body.producer !== undefined && !(await existsActiveProducer(body.producer))) {
+            return res.status(400).json({ message: "Productora inválida o inactiva" });
+        }
+        if (body.type !== undefined && !(await existsType(body.type))) {
+            return res.status(400).json({ message: "Tipo de media no existe" });
+        }
+        if (body.gender !== undefined && !(await existsActiveGender(body.gender))) {
+            return res.status(400).json({ message: "Género inválido o inactivo" });
         }
 
         const setClause = Object.keys(body).map(key => `${key} = ?`).join(', ');

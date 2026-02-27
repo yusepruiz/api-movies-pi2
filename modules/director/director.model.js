@@ -39,3 +39,22 @@ export const patchDirector = async (id, setClause, values) => {
     }
 }
 
+/**
+ * Comprueba si un director existe y está activo
+ * @param {number} id
+ * @returns {boolean}
+ */
+export const existsActiveDirector = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT id FROM Director WHERE id = ? AND state = TRUE',
+            [id]
+        );
+
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error comprobando director activo", error);
+        return false;
+    }
+};
+

@@ -22,6 +22,24 @@ export const createProducer = async (name, state, slogan, description) => {
 }
 
 /**
+ * Comprueba si una productora existe y está activa
+ * @param {number} id
+ * @returns {boolean}
+ */
+export const existsActiveProducer = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT id FROM Producer WHERE id = ? AND state = TRUE',
+            [id]
+        );
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error comprobando productora activa", error);
+        return false;
+    }
+};
+
+/**
  * Actualiza una productora existente en la base de datos
  * @param {number} id
  * @param {string} setClause
