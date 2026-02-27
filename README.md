@@ -65,23 +65,24 @@ El servidor estará disponible en `http://localhost:4000`.
 ### Módulo de Media (`/api/media`)
 - `GET /api/media`: Listar todas las películas y series.
 - `POST /api/media`: Crear una nueva película o serie.
-- `PUT /api/media`: Actualizar una película o serie existente.
-- `DELETE /api/media`: Eliminar una película o serie.
+- `PATCH /api/media/:id`: Actualizar una película o serie existente.
+- `DELETE /api/media/:id`: Eliminar una película o serie.
 
 ### Módulo de Director (`/api/director`)
 - `POST /api/director`: Crear un nuevo director.
-- `PUT /api/director`: Actualizar un director existente.
+- `PATCH /api/director/:id`: Actualizar un director existente.
 
 ### Módulo de Género (`/api/gender`)
 - `POST /api/gender`: Crear un nuevo género.
-- `PUT /api/gender`: Actualizar un género existente.
+- `PATCH /api/gender/:id`: Actualizar un género existente.
 
 ### Módulo de Productora (`/api/producer`)
 - `POST /api/producer`: Crear una nueva productora.
-- `PUT /api/producer`: Actualizar una productora existente.
+- `PATCH /api/producer/:id`: Actualizar una productora existente.
 
 ### Módulo de Tipo (`/api/type`)
 - `POST /api/type`: Crear un nuevo tipo de contenido (Película/Serie).
+- `PATCH /api/type/:id`: Actualizar un tipo de contenido existente.
 
 
 ---
