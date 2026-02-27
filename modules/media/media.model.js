@@ -7,27 +7,19 @@ import pool from '../../database/config.js';
  * @param {object} body 
  */
 export const createMedia = async (body) => {
-<<<<<<< HEAD
-    const { title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type } = body;
-=======
-    const { itle, synopsis, urlMovie, image, yearRelease, gender, director, producer, type } = body;
->>>>>>> 7148ba2401bcd6502aec2db5d8fe9b01023cb9de
+    const { title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id } = body;
 
-    const values = [title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type];
+    const values = [title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id];
 
     try {
         const [result] = await pool.query(
-<<<<<<< HEAD
-            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
-=======
-            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
->>>>>>> 7148ba2401bcd6502aec2db5d8fe9b01023cb9de
+            'INSERT INTO Media (title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
             values
         );
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear el media");
+        console.error("Error al crear el media", error);
     }
 };
 

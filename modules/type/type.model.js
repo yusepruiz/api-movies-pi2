@@ -20,6 +20,24 @@ export const createType = async (name, description) => {
 }
 
 /**
+ * Comprueba si un tipo existe
+ * @param {number} id
+ * @returns {boolean}
+ */
+export const existsType = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT id FROM Type WHERE id = ?',
+            [id]
+        );
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error comprobando tipo", error);
+        return false;
+    }
+};
+
+/**
  * Actualiza un tipo existente en la base de datos
  * @param {number} id
  * @param {string} setClause

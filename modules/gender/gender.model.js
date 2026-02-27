@@ -38,3 +38,21 @@ export const patchGender = async (id, setClause, values) => {
         console.error("Error al actualizar el género", error);
     }
 }
+
+/**
+ * Comprueba si un género existe y está activo
+ * @param {number} id
+ * @returns {boolean}
+ */
+export const existsActiveGender = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT id FROM Gender WHERE id = ? AND state = TRUE',
+            [id]
+        );
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error comprobando género activo", error);
+        return false;
+    }
+};
