@@ -16,7 +16,7 @@ export const createGender = async (name, state, description) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear el género");
+        console.error("Error ejecutando el query para crear el género");
     }
 }
 
@@ -35,7 +35,7 @@ export const patchGender = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el género", error);
+        console.error("Error ejecutando el query para actualizar el género");
     }
 }
 
@@ -52,7 +52,7 @@ export const existsActiveGender = async (id) => {
         );
         return rows.length > 0;
     } catch (error) {
-        console.error("Error comprobando género activo", error);
+        console.error("Error ejecutando el query para comprobar género activo");
         return false;
     }
 };

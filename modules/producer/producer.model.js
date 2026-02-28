@@ -17,7 +17,7 @@ export const createProducer = async (name, state, slogan, description) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear la productora", error);
+        console.error("Error ejecutando el query para crear la productora");
     }
 }
 
@@ -34,7 +34,7 @@ export const existsActiveProducer = async (id) => {
         );
         return rows.length > 0;
     } catch (error) {
-        console.error("Error comprobando productora activa", error);
+        console.error("Error ejecutando el query para comprobar productora activa");
         return false;
     }
 };
@@ -54,6 +54,6 @@ export const updateProducer = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar la productora");
+        console.error("Error ejecutando el query para actualizar la productora");
     }
 }

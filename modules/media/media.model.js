@@ -19,7 +19,7 @@ export const createMedia = async (body) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear el media", error);
+        console.error("Error ejecutando el query para crear el media");
     }
 };
 
@@ -38,7 +38,7 @@ export const patchMedia = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el media", error);
+        console.error("Error ejecutando el query para actualizar el media");
     }
 };
 
@@ -55,7 +55,7 @@ export const deleteMedia = async (id) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al eliminar el media", error);
+        console.error("Error ejecutando el query para eliminar el media");
     }
 };
 
@@ -68,6 +68,6 @@ export const listMedia = async () => {
 
         return rows;
     } catch (error) {
-        console.error("Error al listar el media", error);
+        console.error("Error ejecutando el query para listar el media");
     }
 };

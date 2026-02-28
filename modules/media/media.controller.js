@@ -81,17 +81,18 @@ export const updateMedia = async (req, res) => {
         const affectedRows = await patchMediaModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({ message: "Media no encontrado" });
+            return res.status(404).json({ message: "No se pudo actualizar el media" });
         }
 
         res.status(200).json({
-            message: "Media actualizado exitosamente"
+            message: "Media actualizado exitosamente",
+            submit: true
         });
     } catch (error) {
-        console.error("Error al actualizar el media", error);
+        console.error("Error al actualizar el media");
         res.status(500).json({
             message: "Error al actualizar el media",
-            error: error.message
+            submit: false
         });
     }
 };
@@ -108,17 +109,21 @@ export const deleteMedia = async (req, res) => {
         const affectedRows = await deleteMediaModel(id);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({ message: "Media no encontrado o ya eliminado" });
+            return res.status(404).json({
+                message: "No se pudo eliminar el media",
+                submit: false
+            });
         }
 
         res.status(200).json({
-            message: "Media eliminado exitosamente"
+            message: "Media eliminado exitosamente",
+            submit: true
         });
     } catch (error) {
-        console.error("Error al eliminar el media", error);
+        console.error("Error al eliminar el media");
         res.status(500).json({
             message: "Error al eliminar el media",
-            error: error.message
+            submit: false
         });
     }
 };
@@ -133,15 +138,18 @@ export const listMedia = async (req, res) => {
         const media = await listMediaModel();
 
         if (media.length === 0 || media === undefined) {
-            return res.status(404).json({ message: "Media no encontrado" });
+            return res.status(404).json({
+                message: "No se encontraron películas",
+                submit: false
+            });
         }
 
         res.status(200).json(media);
     } catch (error) {
-        console.error("Error al listar el media", error);
+        console.error("Error al listar el media");
         res.status(500).json({
             message: "Error al listar el media",
-            error: error.message
+            submit: false
         });
     }
 };

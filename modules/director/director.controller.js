@@ -29,7 +29,7 @@ export const createDirector = async (req, res) => {
         console.error("Error al crear el director");
         res.status(500).json({
             message: "Error al crear el director",
-            error: error.message
+            submit: false
         });
     }
 }
@@ -39,7 +39,7 @@ export const createDirector = async (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-export const patchDirector = async (req, res) => {
+export const updateDirector = async (req, res) => {
     const fields = req.body;
     const id = req.params.id;
 
@@ -65,10 +65,10 @@ export const patchDirector = async (req, res) => {
             submit: true
         });
     } catch (error) {
-        console.error("Error al actualizar el director - controller");
+        console.error("Error al actualizar el director");
         res.status(500).json({
-            message: "Error al actualizar el director - controller",
-            error: error.message
+            message: "Error al actualizar el director",
+            submit: false
         });
     }
 }

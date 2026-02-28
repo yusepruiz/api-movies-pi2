@@ -14,7 +14,7 @@ export const createType = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Tipo de película no creado",
+                message: "No se pudo crear el tipo de película",
                 submit: false
             });
         }
@@ -28,7 +28,7 @@ export const createType = async (req, res) => {
         console.error("Error al crear el tipo de película");
         res.status(500).json({
             message: "Error al crear el tipo de película",
-            error: error.message
+            submit: false
         });
     }
 }
@@ -54,7 +54,7 @@ export const updateType = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Tipo de película no encontrado",
+                message: "No se pudo actualizar el tipo de película",
                 submit: false
             });
         }
@@ -67,8 +67,8 @@ export const updateType = async (req, res) => {
     } catch (error) {
         console.error("Error al actualizar el tipo de película");
         res.status(500).json({
-            message: "Error al actualizar la productora",
-            error: error.message
+            message: "Error al actualizar el tipo de película",
+            submit: false
         });
     }
 }

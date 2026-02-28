@@ -16,7 +16,7 @@ export const createDirector = async (name, state) => {
         return result.affectedRows;
 
     } catch (error) {
-        console.error("Error al crear el director");
+        console.error("Error ejecutando el query para crear el director");
     }
 }
 
@@ -35,7 +35,7 @@ export const patchDirector = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el director - model", error);
+        console.error("Error ejecutando el query para actualizar el director");
     }
 }
 
@@ -53,7 +53,7 @@ export const existsActiveDirector = async (id) => {
 
         return rows.length > 0;
     } catch (error) {
-        console.error("Error comprobando director activo", error);
+        console.error("Error ejecutando el query para comprobar director activo");
         return false;
     }
 };

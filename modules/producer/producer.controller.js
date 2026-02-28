@@ -15,7 +15,7 @@ export const createProducer = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Productora no encontrada",
+                message: "No se pudo crear la productora",
                 submit: false
             });
         }
@@ -29,7 +29,7 @@ export const createProducer = async (req, res) => {
         console.error("Error al crear la productora");
         res.status(500).json({
             message: "Error al crear la productora",
-            error: error.message
+            submit: false
         });
     }
 }
@@ -55,7 +55,7 @@ export const updateProducer = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Productora no encontrada",
+                message: "No se pudo actualizar la productora",
                 submit: false
             });
         }
@@ -69,7 +69,7 @@ export const updateProducer = async (req, res) => {
         console.error("Error al actualizar la productora");
         res.status(500).json({
             message: "Error al actualizar la productora",
-            error: error.message
+            submit: false
         });
     }
 }

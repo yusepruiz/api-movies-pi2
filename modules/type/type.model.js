@@ -15,7 +15,7 @@ export const createType = async (name, description) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al crear el tipo de película");
+        console.error("Error ejecutando el query para crear el tipo de película");
     }
 }
 
@@ -32,7 +32,7 @@ export const existsType = async (id) => {
         );
         return rows.length > 0;
     } catch (error) {
-        console.error("Error comprobando tipo", error);
+        console.error("Error ejecutando el query para comprobar tipo");
         return false;
     }
 };
@@ -52,6 +52,6 @@ export const patchType = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error al actualizar el tipo de película", error);
+        console.error("Error ejecutando el query para actualizar el tipo de película");
     }
 }

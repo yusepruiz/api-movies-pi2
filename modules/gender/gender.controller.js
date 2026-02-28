@@ -15,7 +15,7 @@ export const createGender = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Género no encontrado",
+                message: "No se pudo crear el género",
                 submit: false
             });
         }
@@ -29,7 +29,7 @@ export const createGender = async (req, res) => {
         console.error("Error al crear el género");
         res.status(500).json({
             message: "Error al crear el género",
-            error: error.message
+            submit: false
         });
     }
 }
@@ -54,7 +54,7 @@ export const updateGender = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "Género no encontrado",
+                message: "No se pudo actualizar el género",
                 submit: false
             });
         }
@@ -68,7 +68,7 @@ export const updateGender = async (req, res) => {
         console.error("Error al actualizar el género");
         res.status(500).json({
             message: "Error al actualizar el género",
-            error: error.message
+            submit: false
         });
     }
 }
