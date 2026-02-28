@@ -1,4 +1,4 @@
-import { createType as createTypeModel, patchType as patchTypeModel } from "./type.model.js";
+import { createType as createTypeModel, updateType as updateTypeModel } from "./type.model.js";
 
 
 /**
@@ -50,7 +50,7 @@ export const updateType = async (req, res) => {
         const setClause = keys.map(key => `${key} = ?`).join(', ');
         const values = keys.map(key => fields[key]);
 
-        const affectedRows = await patchTypeModel(id, setClause, values);
+        const affectedRows = await updateTypeModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({

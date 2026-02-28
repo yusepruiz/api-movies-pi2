@@ -1,4 +1,4 @@
-import { createDirector as createDirectorModel, patchDirector as updateDirectorModel } from "./director.model.js";
+import { createDirector as createDirectorModel, updateDirector as updateDirectorModel } from "./director.model.js";
 
 /** Director **/
 

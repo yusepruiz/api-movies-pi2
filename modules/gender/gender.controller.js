@@ -1,4 +1,4 @@
-import { createGender as createGenderModel, patchGender as updateGenderModel } from "./gender.model.js";
+import { createGender as createGenderModel, updateGender as updateGenderModel } from "./gender.model.js";
 
 /** Géneros **/
 

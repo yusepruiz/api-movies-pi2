@@ -1,4 +1,4 @@
-import { createMedia as createMediaModel, patchMedia as patchMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
+import { createMedia as createMediaModel, updateMedia as updateMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
 import { existsActiveDirector } from "../director/director.model.js";
 import { existsActiveProducer } from "../producer/producer.model.js";
 import { existsType } from "../type/type.model.js";
@@ -78,7 +78,7 @@ export const updateMedia = async (req, res) => {
         const setClause = Object.keys(body).map(key => `${key} = ?`).join(', ');
         const values = Object.values(body);
 
-        const affectedRows = await patchMediaModel(id, setClause, values);
+        const affectedRows = await updateMediaModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({ message: "No se pudo actualizar el media" });
