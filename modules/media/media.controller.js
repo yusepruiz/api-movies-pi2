@@ -138,7 +138,7 @@ export const listMedia = async (req, res) => {
     try {
         const media = await listMediaModel();
 
-        if (media.length === 0 || media === undefined) {
+       if (media === undefined || media.length === 0) {
             return res.status(404).json({
                 message: "No se encontraron películas",
                 submit: false
