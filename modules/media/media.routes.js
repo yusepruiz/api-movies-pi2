@@ -6,7 +6,7 @@ import { mediaSchema } from "./media.schema.js";
 
 const router = Router();
 
-/** Medias **/
+/** Películas **/
 router.get("/", listMedia);
 router.post("/", validateSchema(mediaSchema), createMedia);
 router.patch("/:id", validateSchema(mediaSchema.partial()), updateMedia);

@@ -23,7 +23,7 @@ export const createMedia = async (req, res) => {
             return res.status(400).json({ message: "Productora inválida o inactiva" });
         }
         if (!await existsType(type_id)) {
-            return res.status(400).json({ message: "Tipo de media no existe" });
+            return res.status(400).json({ message: "El tipo de película no existe" });
         }
         if (!await existsActiveGender(genre_id)) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
@@ -31,18 +31,19 @@ export const createMedia = async (req, res) => {
 
         const affectedRows = await createMediaModel(req.body);
 
-        if (affectedRows === 0) {
-            return res.status(400).json({ message: "No se pudo crear el media" });
+        if (affectedRows === 0 || affectedRows === undefined) {
+            return res.status(400).json({ message: "No se pudo crear la película", submit: false });
         }
 
         res.status(201).json({
-            message: "Media creado exitosamente"
+            message: "Película creada exitosamente",
+            submit: true
         });
     } catch (error) {
-        console.error("Error al crear el media", error);
+        console.error("Error al crear la película", error);
         res.status(500).json({
-            message: "Error al crear el media",
-            error: error.message
+            message: "Error al crear la película",
+            submit: false
         });
     }
 };
@@ -69,7 +70,7 @@ export const updateMedia = async (req, res) => {
             return res.status(400).json({ message: "Productora inválida o inactiva" });
         }
         if (body.type_id !== undefined && !(await existsType(body.type_id))) {
-            return res.status(400).json({ message: "Tipo de media no existe" });
+            return res.status(400).json({ message: "El tipo de película no existe" });
         }
         if (body.genre_id !== undefined && !(await existsActiveGender(body.genre_id))) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
@@ -81,17 +82,17 @@ export const updateMedia = async (req, res) => {
         const affectedRows = await updateMediaModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({ message: "No se pudo actualizar el media" });
+            return res.status(404).json({ message: "No se pudo actualizar la película", submit: false });
         }
 
         res.status(200).json({
-            message: "Media actualizado exitosamente",
+            message: "Película actualizada exitosamente",
             submit: true
         });
     } catch (error) {
-        console.error("Error al actualizar el media");
+        console.error("Error al actualizar la película");
         res.status(500).json({
-            message: "Error al actualizar el media",
+            message: "Error al actualizar la película",
             submit: false
         });
     }
@@ -110,19 +111,19 @@ export const deleteMedia = async (req, res) => {
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "No se pudo eliminar el media",
+                message: "No se pudo eliminar la película",
                 submit: false
             });
         }
 
         res.status(200).json({
-            message: "Media eliminado exitosamente",
+            message: "Película eliminada exitosamente",
             submit: true
         });
     } catch (error) {
-        console.error("Error al eliminar el media");
+        console.error("Error al eliminar la película");
         res.status(500).json({
-            message: "Error al eliminar el media",
+            message: "Error al eliminar la película",
             submit: false
         });
     }
@@ -146,9 +147,9 @@ export const listMedia = async (req, res) => {
 
         res.status(200).json(media);
     } catch (error) {
-        console.error("Error al listar el media");
+        console.error("Error al listar las películas");
         res.status(500).json({
-            message: "Error al listar el media",
+            message: "Error al listar las películas",
             submit: false
         });
     }

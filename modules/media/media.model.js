@@ -13,7 +13,7 @@ export const createMedia = async (body) => {
 
     try {
         const [result] = await pool.query(
-            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+            'INSERT INTO Media (title, synopsis, url, image, release_year, genre_id, director_id, producer_id, type_id, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
             values
         );
 
