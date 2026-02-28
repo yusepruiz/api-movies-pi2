@@ -43,7 +43,7 @@ export const existsType = async (id) => {
  * @param {string} setClause
  * @param {Array} values
  */
-export const patchType = async (id, setClause, values) => {
+export const updateType = async (id, setClause, values) => {
     try {
         const [result] = await pool.query(
             `UPDATE Type SET ${setClause}, update_date = NOW() WHERE id = ?`,

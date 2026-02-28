@@ -34,7 +34,7 @@ export const createType = async (req, res) => {
 }
 
 /**
- * Actualizar una productora existente
+ * Actualizar un tipo de película existente
  * @param {Request} req 
  * @param {Response} res 
  */

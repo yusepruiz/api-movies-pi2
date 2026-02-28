@@ -26,7 +26,7 @@ export const createGender = async (name, state, description) => {
  * @param {string} setClause
  * @param {Array} values
  */
-export const patchGender = async (id, setClause, values) => {
+export const updateGender = async (id, setClause, values) => {
     try {
         const [result] = await pool.query(
             `UPDATE Gender SET ${setClause}, update_date = NOW() WHERE id = ?`,

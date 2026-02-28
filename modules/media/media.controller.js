@@ -13,19 +13,19 @@ import { existsActiveGender } from "../gender/gender.model.js";
  */
 export const createMedia = async (req, res) => {
     try {
-        const { director, producer, type, gender } = req.body;
+        const { director_id, producer_id, type_id, genre_id } = req.body;
 
         // validations
-        if (!await existsActiveDirector(director)) {
+        if (!await existsActiveDirector(director_id)) {
             return res.status(400).json({ message: "Director inválido o inactivo" });
         }
-        if (!await existsActiveProducer(producer)) {
+        if (!await existsActiveProducer(producer_id)) {
             return res.status(400).json({ message: "Productora inválida o inactiva" });
         }
-        if (!await existsType(type)) {
+        if (!await existsType(type_id)) {
             return res.status(400).json({ message: "Tipo de media no existe" });
         }
-        if (!await existsActiveGender(gender)) {
+        if (!await existsActiveGender(genre_id)) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
         }
 
@@ -62,16 +62,16 @@ export const updateMedia = async (req, res) => {
         }
 
         // validations only if corresponding fields are present
-        if (body.director !== undefined && !(await existsActiveDirector(body.director))) {
+        if (body.director_id !== undefined && !(await existsActiveDirector(body.director_id))) {
             return res.status(400).json({ message: "Director inválido o inactivo" });
         }
-        if (body.producer !== undefined && !(await existsActiveProducer(body.producer))) {
+        if (body.producer_id !== undefined && !(await existsActiveProducer(body.producer_id))) {
             return res.status(400).json({ message: "Productora inválida o inactiva" });
         }
-        if (body.type !== undefined && !(await existsType(body.type))) {
+        if (body.type_id !== undefined && !(await existsType(body.type_id))) {
             return res.status(400).json({ message: "Tipo de media no existe" });
         }
-        if (body.gender !== undefined && !(await existsActiveGender(body.gender))) {
+        if (body.genre_id !== undefined && !(await existsActiveGender(body.genre_id))) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
         }
 

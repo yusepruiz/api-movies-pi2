@@ -13,13 +13,13 @@ export const createMedia = async (body) => {
 
     try {
         const [result] = await pool.query(
-            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+            'INSERT INTO Media (title, synopsis, urlMovie, image, yearRelease, gender, director, producer, type, creation_date, update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
             values
         );
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error ejecutando el query para crear el media");
+        console.error("Error ejecutando el query para crear la película");
     }
 };
 
@@ -29,7 +29,7 @@ export const createMedia = async (body) => {
  * @param {string} setClause
  * @param {Array} values
  */
-export const patchMedia = async (id, setClause, values) => {
+export const updateMedia = async (id, setClause, values) => {
     try {
         const [result] = await pool.query(
             `UPDATE Media SET ${setClause}, update_date = NOW() WHERE id = ?`,
@@ -38,7 +38,7 @@ export const patchMedia = async (id, setClause, values) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error ejecutando el query para actualizar el media");
+        console.error("Error ejecutando el query para actualizar la película");
     }
 };
 
@@ -55,7 +55,7 @@ export const deleteMedia = async (id) => {
 
         return result.affectedRows;
     } catch (error) {
-        console.error("Error ejecutando el query para eliminar el media");
+        console.error("Error ejecutando el query para eliminar la película");
     }
 };
 
@@ -68,6 +68,6 @@ export const listMedia = async () => {
 
         return rows;
     } catch (error) {
-        console.error("Error ejecutando el query para listar el media");
+        console.error("Error ejecutando el query para listar las películas");
     }
 };
