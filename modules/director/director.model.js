@@ -58,3 +58,15 @@ export const existsActiveDirector = async (id) => {
     }
 };
 
+export const getDirectors = async () => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Director'
+        );
+
+        return rows;
+    } catch (error) {
+        console.error("Error ejecutando el query para obtener los directores");
+        throw error;
+    }
+}

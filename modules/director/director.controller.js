@@ -1,4 +1,4 @@
-import { createDirector as createDirectorModel, updateDirector as updateDirectorModel } from "./director.model.js";
+import { createDirector as createDirectorModel, updateDirector as updateDirectorModel, getDirectors as getDirectorsModel } from "./director.model.js";
 
 /** Director **/
 
@@ -68,6 +68,31 @@ export const updateDirector = async (req, res) => {
         console.error("Error al actualizar el director");
         res.status(500).json({
             message: "Error al actualizar el director",
+            submit: false
+        });
+    }
+}
+
+export const getDirectors = async (req, res) => {
+    try {
+        const affectedRows = await getDirectorsModel();
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron directores",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Directores encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los directores");
+        res.status(500).json({
+            message: "Error al obtener los directores",
             submit: false
         });
     }
