@@ -41,7 +41,7 @@ export const createDirector = async (req, res) => {
  */
 export const updateDirector = async (req, res) => {
     const fields = req.body;
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     try {
         const keys = Object.keys(fields).filter(key => fields[key] !== undefined);
