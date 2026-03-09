@@ -58,6 +58,10 @@ export const existsActiveDirector = async (id) => {
     }
 };
 
+/**
+ * Obtiene todos los directores de la base de datos
+ * @returns {Array}
+ */
 export const getDirectors = async () => {
     try {
         const [rows] = await pool.query(
@@ -68,5 +72,23 @@ export const getDirectors = async () => {
     } catch (error) {
         console.error("Error ejecutando el query para obtener los directores");
         throw error;
+    }
+}
+
+/**
+ * Obtener el director con el id especificado
+ * @param {number} id
+ * @return {Array}
+ */
+export const getDirectorById = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Director WHERE id = ?',
+            [id]
+        );
+
+        return rows;
+    } catch (error) {
+
     }
 }
