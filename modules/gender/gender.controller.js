@@ -1,11 +1,11 @@
-import { createGender as createGenderModel, updateGender as updateGenderModel } from "./gender.model.js";
+import { createGender as createGenderModel, updateGender as updateGenderModel, getGenders as getGendersModel, getGenderById as getGenderByIdModel } from "./gender.model.js";
 
 /** Géneros **/
 
 /**
  * Crear un nuevo género
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const createGender = async (req, res) => {
     const { name, state, description } = req.body;
@@ -36,8 +36,8 @@ export const createGender = async (req, res) => {
 
 /**
  * Actualizar un género existente
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const updateGender = async (req, res) => {
     const fields = req.body;
@@ -68,6 +68,70 @@ export const updateGender = async (req, res) => {
         console.error("Error al actualizar el género");
         res.status(500).json({
             message: "Error al actualizar el género",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener todos los géneros
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getGenders = async (req, res) => {
+    try {
+        const affectedRows = await getGendersModel();
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron géneros",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Géneros encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los géneros");
+        res.status(500).json({
+            message: "Error al obtener los géneros",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener un género por su ID
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getGenderById = async (req, res) => {
+    const id = Number(req.params.id);
+
+    try {
+        const affectedRows = await getGenderByIdModel(id);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontró el género",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Género encontrado exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener el género");
+        res.status(500).json({
+            message: "Error al obtener el género",
             submit: false
         });
     }

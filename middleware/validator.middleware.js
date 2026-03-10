@@ -1,5 +1,10 @@
 import { ZodError } from 'zod';
 
+/**
+ * Middleware para validar el cuerpo de la petición contra un esquema de Zod
+ * @param {import('zod').ZodSchema} schema - Esquema de validación
+ * @returns {Function} Middleware de Express
+ */
 export const validateSchema = (schema) => (req, res, next) => {
     try {
         schema.parse(req.body);

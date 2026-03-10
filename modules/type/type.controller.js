@@ -3,8 +3,8 @@ import { createType as createTypeModel, updateType as updateTypeModel } from "./
 
 /**
  * Crear tipo de película
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const createType = async (req, res) => {
     const { name, description } = req.body;
@@ -35,8 +35,8 @@ export const createType = async (req, res) => {
 
 /**
  * Actualizar un tipo de película existente
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const updateType = async (req, res) => {
     const fields = req.body;

@@ -4,8 +4,8 @@ import { createProducer as createProducerModel, updateProducer as updateProducer
 
 /**
  * Crear una nueva productora
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const createProducer = async (req, res) => {
     try {
@@ -36,8 +36,8 @@ export const createProducer = async (req, res) => {
 
 /**
  * Actualizar una productora existente
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const updateProducer = async (req, res) => {
     const fields = req.body;

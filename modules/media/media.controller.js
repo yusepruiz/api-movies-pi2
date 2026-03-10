@@ -8,8 +8,8 @@ import { existsActiveGender } from "../gender/gender.model.js";
 
 /**
  * Crear media
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const createMedia = async (req, res) => {
     try {
@@ -50,8 +50,8 @@ export const createMedia = async (req, res) => {
 
 /**
  * Actualizar media (PATCH)
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const updateMedia = async (req, res) => {
     try {
@@ -100,8 +100,8 @@ export const updateMedia = async (req, res) => {
 
 /**
  * Eliminar media
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const deleteMedia = async (req, res) => {
     try {
@@ -131,14 +131,14 @@ export const deleteMedia = async (req, res) => {
 
 /**
  * Listar media
- * @param {Request} req 
- * @param {Response} res 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
  */
 export const listMedia = async (req, res) => {
     try {
         const media = await listMediaModel();
 
-       if (media === undefined || media.length === 0) {
+        if (media === undefined || media.length === 0) {
             return res.status(404).json({
                 message: "No se encontraron películas",
                 submit: false

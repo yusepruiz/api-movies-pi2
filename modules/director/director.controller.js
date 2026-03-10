@@ -4,12 +4,12 @@ import { createDirector as createDirectorModel, updateDirector as updateDirector
 
 /**
  * Crea un nuevo registro de director en el sistema.
- * * @async
+ * @async
  * @function createDirector
  * @param {import('express').Request} req - Objeto de petición. Se espera `name` y `state` en req.body.
  * @param {import('express').Response} res - Objeto de respuesta.
  * @returns {Promise<void>}
- * * @description
+ * @description
  * - **201 (Created):** Si el director se inserta correctamente.
  * - **404 (Not Found):** Si la base de datos no confirma filas afectadas tras la inserción.
  * - **500 (Internal Server Error):** Si ocurre una excepción durante el proceso.
@@ -91,13 +91,13 @@ export const updateDirector = async (req, res) => {
 
 /**
  * Obtiene la lista completa de directores desde la base de datos.
- * * @async
+ * @async
  * @function getDirectors
  * @param {import('express').Request} req - Objeto de petición de Express.
  * @param {import('express').Response} res - Objeto de respuesta de Express.
  * 
  * @returns {Promise<void>} No retorna un valor directamente, envía una respuesta JSON al cliente.
- * * @description
+ * @description
  * Esta función invoca al modelo `getDirectorsModel` para recuperar los registros.
  * - Si tiene éxito y hay datos, devuelve un status **201** con los registros.
  * - Si no hay registros, devuelve un status **404**.
@@ -130,12 +130,12 @@ export const getDirectors = async (req, res) => {
 
 /**
  * Obtiene un director específico por su ID.
- * * @async
+ * @async
  * @function getDirectorById
  * @param {import('express').Request} req - Objeto de petición de Express. Se espera que contenga el ID en los parámetros (ej. req.params.id).
  * @param {import('express').Response} res - Objeto de respuesta de Express.
  * @returns {Promise<void>} No retorna un valor directamente, sino que envía una respuesta JSON al cliente.
- * * @throws {Error} Si ocurre un error inesperado durante la consulta a la base de datos.
+ * @throws {Error} Si ocurre un error inesperado durante la consulta a la base de datos.
  */
 export const getDirectorById = async (req, res) => {
     const id = Number(req.params.id);

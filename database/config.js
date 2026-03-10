@@ -4,6 +4,9 @@ import mysql from "mysql2/promise";
  * Clase para gestionar la conexión a la base de datos MySQL
  */
 class Database {
+    /**
+     * Inicializa la instancia de la base de datos
+     */
     constructor() {
         this.pool = null;
     }

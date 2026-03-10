@@ -56,3 +56,39 @@ export const existsActiveGender = async (id) => {
         return false;
     }
 };
+
+
+/**
+ * Obtiene todos los géneros de la base de datos
+ * @returns {Array}
+ */
+export const getGenders = async () => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Gender'
+        );
+
+        return rows;
+    } catch (error) {
+        console.error("Error ejecutando el query para obtener los géneros");
+        throw error;
+    }
+}
+
+/**
+ * Obtener el género con el id especificado
+ * @param {number} id
+ * @return {Array}
+ */
+export const getGenderById = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Gender WHERE id = ?',
+            [id]
+        );
+
+        return rows;
+    } catch (error) {
+
+    }
+}
