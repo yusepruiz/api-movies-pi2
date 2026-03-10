@@ -1,4 +1,4 @@
-import { createType as createTypeModel, updateType as updateTypeModel } from "./type.model.js";
+import { createType as createTypeModel, updateType as updateTypeModel, getTypes as getTypesModel, getTypeById as getTypeByIdModel } from "./type.model.js";
 
 
 /**
@@ -68,6 +68,70 @@ export const updateType = async (req, res) => {
         console.error("Error al actualizar el tipo de película");
         res.status(500).json({
             message: "Error al actualizar el tipo de película",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener todos los tipos de películas
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getTypes = async (req, res) => {
+    try {
+        const affectedRows = await getTypesModel();
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron tipos de películas",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Tipos de películas encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los tipos de películas");
+        res.status(500).json({
+            message: "Error al obtener los tipos de películas",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener un tipo de película por su ID
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getTypeById = async (req, res) => {
+    const id = Number(req.params.id);
+
+    try {
+        const affectedRows = await getTypeByIdModel(id);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontró el tipo de película",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Tipo de película encontrado exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener el tipo de película");
+        res.status(500).json({
+            message: "Error al obtener el tipo de película",
             submit: false
         });
     }

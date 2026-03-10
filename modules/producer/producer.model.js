@@ -59,7 +59,6 @@ export const updateProducer = async (id, setClause, values) => {
 }
 
 
-
 /**
  * Obtiene todos los productores de la base de datos
  * @returns {Array}

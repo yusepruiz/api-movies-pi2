@@ -55,3 +55,38 @@ export const updateType = async (id, setClause, values) => {
         console.error("Error ejecutando el query para actualizar el tipo de película");
     }
 }
+
+/**
+ * Obtiene todos los tipos de películas de la base de datos
+ * @returns {Array}
+ */
+export const getTypes = async () => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Type'
+        );
+
+        return rows;
+    } catch (error) {
+        console.error("Error ejecutando el query para obtener los tipos de películas");
+        throw error;
+    }
+}
+
+/**
+ * Obtener el tipo de película con el id especificado
+ * @param {number} id
+ * @return {Array}
+ */
+export const getTypeById = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Type WHERE id = ?',
+            [id]
+        );
+
+        return rows;
+    } catch (error) {
+
+    }
+}
