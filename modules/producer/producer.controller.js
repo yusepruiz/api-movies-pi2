@@ -1,4 +1,4 @@
-import { createProducer as createProducerModel, updateProducer as updateProducerModel } from "./producer.model.js";
+import { createProducer as createProducerModel, updateProducer as updateProducerModel, getProducers as getProducersModel, getProducerById as getProducerByIdModel } from "./producer.model.js";
 
 /** Productora **/
 
@@ -69,6 +69,70 @@ export const updateProducer = async (req, res) => {
         console.error("Error al actualizar la productora");
         res.status(500).json({
             message: "Error al actualizar la productora",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener todos los productores
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getProducers = async (req, res) => {
+    try {
+        const affectedRows = await getProducersModel();
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron productores",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Productores encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los productores");
+        res.status(500).json({
+            message: "Error al obtener los productores",
+            submit: false
+        });
+    }
+}
+
+
+/**
+ * Obtener un productor por su ID
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getProducerById = async (req, res) => {
+    const id = Number(req.params.id);
+
+    try {
+        const affectedRows = await getProducerByIdModel(id);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontró el productor",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Productor encontrado exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener el productor");
+        res.status(500).json({
+            message: "Error al obtener el productor",
             submit: false
         });
     }

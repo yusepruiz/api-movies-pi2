@@ -57,3 +57,40 @@ export const updateProducer = async (id, setClause, values) => {
         console.error("Error ejecutando el query para actualizar la productora");
     }
 }
+
+
+
+/**
+ * Obtiene todos los productores de la base de datos
+ * @returns {Array}
+ */
+export const getProducers = async () => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Producer'
+        );
+
+        return rows;
+    } catch (error) {
+        console.error("Error ejecutando el query para obtener los productores");
+        throw error;
+    }
+}
+
+/**
+ * Obtener el productor con el id especificado
+ * @param {number} id
+ * @return {Array}
+ */
+export const getProducerById = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Producer WHERE id = ?',
+            [id]
+        );
+
+        return rows;
+    } catch (error) {
+
+    }
+}
