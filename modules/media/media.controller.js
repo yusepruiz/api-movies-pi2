@@ -2,7 +2,7 @@ import { createMedia as createMediaModel, updateMedia as updateMediaModel, delet
 import { existsActiveDirector } from "../director/director.model.js";
 import { existsActiveProducer } from "../producer/producer.model.js";
 import { existsType } from "../type/type.model.js";
-import { existsActiveGender } from "../gender/gender.model.js";
+import { existsActiveGenre } from "../genre/genre.model.js";
 
 /** Media */
 
@@ -25,7 +25,7 @@ export const createMedia = async (req, res) => {
         if (!await existsType(type_id)) {
             return res.status(400).json({ message: "El tipo de película no existe" });
         }
-        if (!await existsActiveGender(genre_id)) {
+        if (!await existsActiveGenre(genre_id)) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
         }
 
@@ -72,7 +72,7 @@ export const updateMedia = async (req, res) => {
         if (body.type_id !== undefined && !(await existsType(body.type_id))) {
             return res.status(400).json({ message: "El tipo de película no existe" });
         }
-        if (body.genre_id !== undefined && !(await existsActiveGender(body.genre_id))) {
+        if (body.genre_id !== undefined && !(await existsActiveGenre(body.genre_id))) {
             return res.status(400).json({ message: "Género inválido o inactivo" });
         }
 

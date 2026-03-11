@@ -114,7 +114,7 @@ export const getDirectors = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Directores encontrados exitosamente",
             affectedRows: affectedRows,
             submit: true
@@ -150,7 +150,7 @@ export const getDirectorById = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Director encontrado exitosamente",
             affectedRows: affectedRows,
             submit: true

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const genderSchema = z.object({
+export const genreSchema = z.object({
     name: z.string({
         message: "El nombre debe ser un texto",
     }).min(3, "El nombre debe tener al menos 3 caracteres")

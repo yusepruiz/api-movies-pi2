@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 
 import routerDirector from "./modules/director/director.routes.js";
-import routerGender from "./modules/gender/gender.routes.js";
+import routerGenre from "./modules/genre/genre.routes.js";
 import routerMedia from "./modules/media/media.routes.js";
 import routerProducer from "./modules/producer/producer.routes.js";
 import routerType from "./modules/type/type.routes.js";
@@ -19,7 +19,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 4000;
         this.directorPath = "/api/director";
-        this.genderPath = "/api/gender";
+        this.genrePath = "/api/genre";
         this.mediaPath = "/api/media";
         this.producerPath = "/api/producer";
         this.typePath = "/api/type";
@@ -49,7 +49,7 @@ class Server {
      */
     routes() {
         this.app.use(this.directorPath, routerDirector);
-        this.app.use(this.genderPath, routerGender);
+        this.app.use(this.genrePath, routerGenre);
         this.app.use(this.mediaPath, routerMedia);
         this.app.use(this.producerPath, routerProducer);
         this.app.use(this.typePath, routerType);

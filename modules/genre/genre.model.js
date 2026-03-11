@@ -7,7 +7,7 @@ import pool from '../../database/config.js';
  * @param {string} state 
  * @param {string} description 
  */
-export const createGender = async (name, state, description) => {
+export const createGenre = async (name, state, description) => {
     try {
         const [result] = await pool.query(
             'INSERT INTO Gender (name, state, description, creation_date, update_date) VALUES (?, ?, ?, NOW(), NOW())',
@@ -26,7 +26,7 @@ export const createGender = async (name, state, description) => {
  * @param {string} setClause
  * @param {Array} values
  */
-export const updateGender = async (id, setClause, values) => {
+export const updateGenre = async (id, setClause, values) => {
     try {
         const [result] = await pool.query(
             `UPDATE Gender SET ${setClause}, update_date = NOW() WHERE id = ?`,
@@ -44,7 +44,7 @@ export const updateGender = async (id, setClause, values) => {
  * @param {number} id
  * @returns {boolean}
  */
-export const existsActiveGender = async (id) => {
+export const existsActiveGenre = async (id) => {
     try {
         const [rows] = await pool.query(
             'SELECT id FROM Gender WHERE id = ? AND state = TRUE',
@@ -63,7 +63,7 @@ export const existsActiveGender = async (id) => {
  * @async
  * @returns {Promise<Array>} Lista de géneros.
  */
-export const getGenders = async () => {
+export const getGenres = async () => {
     try {
         const [rows] = await pool.query(
             `SELECT * FROM Gender`
@@ -82,7 +82,7 @@ export const getGenders = async () => {
  * @param {number} id - ID del género.
  * @returns {Promise<Array>} Resultado de la consulta.
  */
-export const getGenderById = async (id) => {
+export const getGenreById = async (id) => {
     try {
         const [rows] = await pool.query(
             'SELECT * FROM Gender WHERE id = ?',

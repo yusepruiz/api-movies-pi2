@@ -1,4 +1,4 @@
-import { createGender as createGenderModel, updateGender as updateGenderModel, getGenders as getGendersModel, getGenderById as getGenderByIdModel } from "./gender.model.js";
+import { createGenre as createGenreModel, updateGenre as updateGenreModel, getGenres as getGenresModel, getGenreById as getGenreByIdModel } from "./genre.model.js";
 
 /** Géneros **/
 
@@ -8,11 +8,11 @@ import { createGender as createGenderModel, updateGender as updateGenderModel, g
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-export const createGender = async (req, res) => {
+export const createGenre = async (req, res) => {
     const { name, state, description } = req.body;
 
     try {
-        const affectedRows = await createGenderModel(name, state, description);
+        const affectedRows = await createGenreModel(name, state, description);
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
@@ -41,7 +41,7 @@ export const createGender = async (req, res) => {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-export const updateGender = async (req, res) => {
+export const updateGenre = async (req, res) => {
     const fields = req.body;
     const id = req.params.id;
 
@@ -52,7 +52,7 @@ export const updateGender = async (req, res) => {
         const setClause = keys.map(key => `${key} = ?`).join(', ');
         const values = keys.map(key => fields[key]);
 
-        const affectedRows = await updateGenderModel(id, setClause, values);
+        const affectedRows = await updateGenreModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
             return res.status(404).json({
@@ -82,9 +82,10 @@ export const updateGender = async (req, res) => {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-export const getGenders = async (req, res) => {
+export const getGenres = async (req, res) => {
+
     try {
-        const affectedRows = await getGendersModel();
+        const affectedRows = await getGenresModel();
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
             return res.status(404).json({
@@ -113,11 +114,11 @@ export const getGenders = async (req, res) => {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-export const getGenderById = async (req, res) => {
+export const getGenreById = async (req, res) => {
     const id = Number(req.params.id);
 
     try {
-        const affectedRows = await getGenderByIdModel(id);
+        const affectedRows = await getGenreByIdModel(id);
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
             return res.status(404).json({
