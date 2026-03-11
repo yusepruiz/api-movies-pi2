@@ -43,12 +43,12 @@ export const createDirector = async (req, res) => {
 
 /**
  * Actualiza parcialmente un director existente mediante su ID.
- * * @async
+ * @async
  * @function updateDirector
  * @param {import('express').Request} req - Objeto de petición. Contiene `id` en params y los campos a actualizar en body.
  * @param {import('express').Response} res - Objeto de respuesta.
  * @returns {Promise<void>}
- * * @description
+ * @description
  * La función construye dinámicamente la cláusula SET basada en las llaves presentes en `req.body`.
  * - **200 (OK):** Actualización exitosa.
  * - **400 (Bad Request):** Si el cuerpo de la petición está vacío.
@@ -106,31 +106,6 @@ export const updateDirector = async (req, res) => {
 export const getDirectors = async (req, res) => {
     try {
         const affectedRows = await getDirectorsModel();
-
-        if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
-                message: "No se encontraron directores",
-                submit: false
-            });
-        }
-
-        res.status(201).json({
-            message: "Directores encontrados exitosamente",
-            affectedRows: affectedRows,
-            submit: true
-        });
-    } catch (error) {
-        console.error("Error al obtener los directores");
-        res.status(500).json({
-            message: "Error al obtener los directores",
-            submit: false
-        });
-    }
-}
-
-export const getActiveDirectors = async (req, res) => {
-    try {
-        const affectedRows = await getDirectorsModel(true);
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
             return res.status(404).json({

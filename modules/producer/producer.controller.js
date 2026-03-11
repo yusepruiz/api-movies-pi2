@@ -4,6 +4,7 @@ import { createProducer as createProducerModel, updateProducer as updateProducer
 
 /**
  * Crear una nueva productora
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -36,6 +37,7 @@ export const createProducer = async (req, res) => {
 
 /**
  * Actualizar una productora existente
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -77,6 +79,7 @@ export const updateProducer = async (req, res) => {
 
 /**
  * Obtener todos los productores
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -91,7 +94,7 @@ export const getProducers = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Productores encontrados exitosamente",
             affectedRows: affectedRows,
             submit: true
@@ -105,39 +108,10 @@ export const getProducers = async (req, res) => {
     }
 }
 
-
-/**
- * Obtener todos los productores
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
- */
-export const getActiveProducers = async (req, res) => {
-    try {
-        const affectedRows = await getProducersModel(true);
-
-        if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
-                message: "No se encontraron productores",
-                submit: false
-            });
-        }
-
-        res.status(201).json({
-            message: "Productores encontrados exitosamente",
-            affectedRows: affectedRows,
-            submit: true
-        });
-    } catch (error) {
-        console.error("Error al obtener los productores");
-        res.status(500).json({
-            message: "Error al obtener los productores",
-            submit: false
-        });
-    }
-}
 
 /**
  * Obtener un productor por su ID
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -154,7 +128,7 @@ export const getProducerById = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Productor encontrado exitosamente",
             affectedRows: affectedRows,
             submit: true

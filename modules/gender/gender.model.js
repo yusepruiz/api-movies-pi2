@@ -60,14 +60,13 @@ export const existsActiveGender = async (id) => {
 
 /**
  * Obtiene todos los géneros de la base de datos
- * @returns {Array}
+ * @async
+ * @returns {Promise<Array>} Lista de géneros.
  */
-export const getGenders = async (conditional = false) => {
+export const getGenders = async () => {
     try {
-        const whereClause = 'WHERE state = TRUE'; // Solo obtener directores activos
-
         const [rows] = await pool.query(
-            `SELECT * FROM Gender ${conditional && whereClause}`
+            `SELECT * FROM Gender`
         );
 
         return rows;
@@ -79,8 +78,9 @@ export const getGenders = async (conditional = false) => {
 
 /**
  * Obtener el género con el id especificado
- * @param {number} id
- * @return {Array}
+ * @async
+ * @param {number} id - ID del género.
+ * @returns {Promise<Array>} Resultado de la consulta.
  */
 export const getGenderById = async (id) => {
     try {

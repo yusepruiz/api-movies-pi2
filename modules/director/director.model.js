@@ -60,14 +60,13 @@ export const existsActiveDirector = async (id) => {
 
 /**
  * Obtiene todos los directores de la base de datos
- * @returns {Array}
+ * @async
+ * @returns {Promise<Array>} Lista de directores.
  */
-export const getDirectors = async (conditional = false) => {
+export const getDirectors = async () => {
     try {
-
-        const whereClause = 'WHERE state = TRUE'; // Solo obtener directores activos
         const [rows] = await pool.query(
-            `SELECT * FROM Director ${conditional && whereClause}`
+            `SELECT * FROM Director`
         );
 
         return rows;
@@ -79,8 +78,9 @@ export const getDirectors = async (conditional = false) => {
 
 /**
  * Obtener el director con el id especificado
- * @param {number} id
- * @return {Array}
+ * @async
+ * @param {number} id - ID del director.
+ * @returns {Promise<Array>} Resultado de la consulta.
  */
 export const getDirectorById = async (id) => {
     try {

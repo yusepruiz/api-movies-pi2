@@ -4,6 +4,7 @@ import { createGender as createGenderModel, updateGender as updateGenderModel, g
 
 /**
  * Crear un nuevo género
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -36,6 +37,7 @@ export const createGender = async (req, res) => {
 
 /**
  * Actualizar un género existente
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -76,6 +78,7 @@ export const updateGender = async (req, res) => {
 
 /**
  * Obtener todos los géneros
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -90,37 +93,7 @@ export const getGenders = async (req, res) => {
             });
         }
 
-        res.status(201).json({
-            message: "Géneros encontrados exitosamente",
-            affectedRows: affectedRows,
-            submit: true
-        });
-    } catch (error) {
-        console.error("Error al obtener los géneros");
-        res.status(500).json({
-            message: "Error al obtener los géneros",
-            submit: false
-        });
-    }
-}
-
-/**
- * Obtener todos los géneros
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
- */
-export const getActiveGenders = async (req, res) => {
-    try {
-        const affectedRows = await getGendersModel(true);
-
-        if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
-                message: "No se encontraron géneros",
-                submit: false
-            });
-        }
-
-        res.status(201).json({
+        res.status(200).json({
             message: "Géneros encontrados exitosamente",
             affectedRows: affectedRows,
             submit: true
@@ -136,6 +109,7 @@ export const getActiveGenders = async (req, res) => {
 
 /**
  * Obtener un género por su ID
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -152,7 +126,7 @@ export const getGenderById = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Género encontrado exitosamente",
             affectedRows: affectedRows,
             submit: true

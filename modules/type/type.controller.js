@@ -3,6 +3,7 @@ import { createType as createTypeModel, updateType as updateTypeModel, getTypes 
 
 /**
  * Crear tipo de película
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -35,6 +36,7 @@ export const createType = async (req, res) => {
 
 /**
  * Actualizar un tipo de película existente
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -76,6 +78,7 @@ export const updateType = async (req, res) => {
 
 /**
  * Obtener todos los tipos de películas
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -90,7 +93,7 @@ export const getTypes = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Tipos de películas encontrados exitosamente",
             affectedRows: affectedRows,
             submit: true
@@ -107,6 +110,7 @@ export const getTypes = async (req, res) => {
 
 /**
  * Obtener un tipo de película por su ID
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -123,7 +127,7 @@ export const getTypeById = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             message: "Tipo de película encontrado exitosamente",
             affectedRows: affectedRows,
             submit: true

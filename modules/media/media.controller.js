@@ -157,7 +157,8 @@ export const getMedia = async (req, res) => {
 
 
 /**
- * Obtener un productor por su ID
+ * Obtener una película por su ID
+ * @async
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
@@ -169,20 +170,20 @@ export const getMediaById = async (req, res) => {
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
             return res.status(404).json({
-                message: "No se encontró el productor",
+                message: "No se encontró la película",
                 submit: false
             });
         }
 
-        res.status(201).json({
-            message: "Productor encontrado exitosamente",
+        res.status(200).json({
+            message: "Película encontrada exitosamente",
             affectedRows: affectedRows,
             submit: true
         });
     } catch (error) {
-        console.error("Error al obtener el productor");
+        console.error("Error al obtener la película");
         res.status(500).json({
-            message: "Error al obtener el productor",
+            message: "Error al obtener la película",
             submit: false
         });
     }
