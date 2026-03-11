@@ -107,6 +107,36 @@ export const getProducers = async (req, res) => {
 
 
 /**
+ * Obtener todos los productores
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getActiveProducers = async (req, res) => {
+    try {
+        const affectedRows = await getProducersModel(true);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron productores",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Productores encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los productores");
+        res.status(500).json({
+            message: "Error al obtener los productores",
+            submit: false
+        });
+    }
+}
+
+/**
  * Obtener un productor por su ID
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 

@@ -104,6 +104,35 @@ export const getGenders = async (req, res) => {
     }
 }
 
+/**
+ * Obtener todos los géneros
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getActiveGenders = async (req, res) => {
+    try {
+        const affectedRows = await getGendersModel(true);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron géneros",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Géneros encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los géneros");
+        res.status(500).json({
+            message: "Error al obtener los géneros",
+            submit: false
+        });
+    }
+}
 
 /**
  * Obtener un género por su ID
