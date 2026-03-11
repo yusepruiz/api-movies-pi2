@@ -53,37 +53,53 @@ El servidor estará disponible en `http://localhost:4000`.
 
 ## 📂 Estructura del Proyecto
 
-- `database/`: Configuración y conexión a MySQL.
-- `middleware/`: Middlewares personalizados.
-- `modules/`: Lógica central de la aplicación.
-  - `director/`, `gender/`, `media/`, `producer/`, `type/`: Módulos de la API con sus respectivas rutas y lógica.
-- `index.js`: Punto de entrada de la aplicación.
-- `server.js`: Configuración de la clase Server (Express).
+- `database/`: Conexión y configuración de la base de datos MySQL.
+- `middleware/`: Middlewares como el validador de esquemas.
+- `modules/`: Módulos de la API divididos por entidad.
+  - `director/`, `gender/`, `media/`, `producer/`, `type/`: Cada uno con sus modelos, controladores, rutas y esquemas de validación.
+- `index.js`: Punto de entrada que inicializa el servidor.
+- `server.js`: Configuración principal de la clase Server (Express).
 
 ## 📡 Endpoints de la API
 
-### Módulo de Media (`/api/media`)
-- `GET /api/media`: Listar todas las películas y series.
-- `POST /api/media`: Crear una nueva película o serie.
-- `PATCH /api/media/:id`: Actualizar una película o serie existente.
-- `DELETE /api/media/:id`: Eliminar una película o serie.
+Todos los endpoints básicos de consulta devuelven un estado `200 OK`. Los de creación devuelven `201 Created`.
 
-### Módulo de Director (`/api/director`)
-- `POST /api/director`: Crear un nuevo director.
-- `PATCH /api/director/:id`: Actualizar un director existente.
+### 🎬 Películas / Media (`/api/media`)
+- `GET /api/media`: Listar todas las películas.
+- `GET /api/media/:id`: Obtener una película por ID.
+- `POST /api/media`: Crear nueva película.
+- `PATCH /api/media/:id`: Actualizar datos de una película.
+- `DELETE /api/media/:id`: Eliminar una película.
 
-### Módulo de Género (`/api/gender`)
-- `POST /api/gender`: Crear un nuevo género.
-- `PATCH /api/gender/:id`: Actualizar un género existente.
+### 👤 Directores (`/api/director`)
+- `GET /api/director`: Listar todos los directores.
+- `GET /api/director/:id`: Obtener director por ID.
+- `POST /api/director`: Crear nuevo director.
+- `PATCH /api/director/:id`: Actualizar director por ID.
 
-### Módulo de Productora (`/api/producer`)
-- `POST /api/producer`: Crear una nueva productora.
-- `PATCH /api/producer/:id`: Actualizar una productora existente.
+### 🎭 Géneros (`/api/gender`)
+- `GET /api/gender`: Listar todos los géneros.
+- `GET /api/gender/:id`: Obtener género por ID.
+- `POST /api/gender`: Crear nuevo género.
+- `PATCH /api/gender/:id`: Actualizar género por ID.
 
-### Módulo de Tipo (`/api/type`)
-- `POST /api/type`: Crear un nuevo tipo de contenido (Película/Serie).
-- `PATCH /api/type/:id`: Actualizar un tipo de contenido existente.
+### 🏢 Productoras (`/api/producer`)
+- `GET /api/producer`: Listar todas las productoras.
+- `GET /api/producer/:id`: Obtener productora por ID.
+- `POST /api/producer`: Crear nueva productora.
+- `PATCH /api/producer/:id`: Actualizar productora por ID.
 
+### 🏷️ Tipos de Contenido (`/api/type`)
+- `GET /api/type`: Listar todos los tipos.
+- `GET /api/type/:id`: Obtener tipo por ID.
+- `POST /api/type`: Crear nuevo tipo.
+- `PATCH /api/type/:id`: Actualizar tipo por ID.
+
+## 🛡️ Validación de Datos
+El proyecto utiliza **Zod** para la validación de esquemas en tiempo real. Cada petición `POST` y `PATCH` pasa por un middleware de validación (`validateSchema`) que asegura la integridad de los datos antes de llegar al controlador.
+
+## 📝 Documentación JSDoc
+Todo el código está documentado mediante **JSDoc**, lo que proporciona soporte completo de IntelliSense y facilita el mantenimiento a largo plazo mediante la descripción detallada de funciones, parámetros y retornos.
 
 ---
 *Proyecto desarrollado para la asignatura Proyecto Integrado II.*
