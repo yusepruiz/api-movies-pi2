@@ -13,19 +13,19 @@ export const mediaSchema = z.object({
     image: z.string({
         message: "La imagen debe ser un texto"
     }).url("La imagen debe ser una URL válida"),
-    release_year: z.number({
+    release_year: z.coerce.number({
         message: "El año de estreno debe ser un número"
     }).int().min(1800, "Año no válido").max(new Date().getFullYear() + 10, "Año no válido"),
-    genre_id: z.number({
+    genre_id: z.coerce.number({
         message: "El género debe ser numérico"
     }).int(),
-    director_id: z.number({
+    director_id: z.coerce.number({
         message: "El director debe ser numérico"
     }).int(),
-    producer_id: z.number({
+    producer_id: z.coerce.number({
         message: "La productora debe ser numérico"
     }).int(),
-    type_id: z.number({
+    type_id: z.coerce.number({
         message: "El tipo debe ser numérico"
     }).int(),
     creationDate: z.date().optional(),

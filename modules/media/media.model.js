@@ -62,7 +62,7 @@ export const deleteMedia = async (id) => {
 /**
  * Listar media
  */
-export const listMedia = async () => {
+export const getMedia = async () => {
     try {
         const [rows] = await pool.query('SELECT * FROM Media');
 
@@ -71,3 +71,21 @@ export const listMedia = async () => {
         console.error("Error ejecutando el query para listar las películas");
     }
 };
+
+/**
+ * Obtener el productor con el id especificado
+ * @param {number} id
+ * @return {Array}
+ */
+export const getMediaById = async (id) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM Media WHERE id = ?',
+            [id]
+        );
+
+        return rows;
+    } catch (error) {
+
+    }
+}

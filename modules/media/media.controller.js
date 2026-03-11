@@ -1,4 +1,4 @@
-import { createMedia as createMediaModel, updateMedia as updateMediaModel, deleteMedia as deleteMediaModel, listMedia as listMediaModel } from "./media.model.js";
+import { createMedia as createMediaModel, updateMedia as updateMediaModel, deleteMedia as deleteMediaModel, getMedia as getMediaModel, getMediaById as getMediaByIdModel } from "./media.model.js";
 import { existsActiveDirector } from "../director/director.model.js";
 import { existsActiveProducer } from "../producer/producer.model.js";
 import { existsType } from "../type/type.model.js";
@@ -134,9 +134,9 @@ export const deleteMedia = async (req, res) => {
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  */
-export const listMedia = async (req, res) => {
+export const getMedia = async (req, res) => {
     try {
-        const media = await listMediaModel();
+        const media = await getMediaModel();
 
         if (media === undefined || media.length === 0) {
             return res.status(404).json({
@@ -154,3 +154,36 @@ export const listMedia = async (req, res) => {
         });
     }
 };
+
+
+/**
+ * Obtener un productor por su ID
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+export const getMediaById = async (req, res) => {
+    const id = Number(req.params.id);
+
+    try {
+        const affectedRows = await getMediaByIdModel(id);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontró el productor",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Productor encontrado exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener el productor");
+        res.status(500).json({
+            message: "Error al obtener el productor",
+            submit: false
+        });
+    }
+}
