@@ -56,7 +56,7 @@ El servidor estará disponible en `http://localhost:4000`.
 - `database/`: Conexión y configuración de la base de datos MySQL.
 - `middleware/`: Middlewares como el validador de esquemas.
 - `modules/`: Módulos de la API divididos por entidad.
-  - `director/`, `gender/`, `media/`, `producer/`, `type/`: Cada uno con sus modelos, controladores, rutas y esquemas de validación.
+  - `director/`, `genre/`, `media/`, `producer/`, `type/`: Cada uno con sus modelos, controladores, rutas y esquemas de validación.
 - `index.js`: Punto de entrada que inicializa el servidor.
 - `server.js`: Configuración principal de la clase Server (Express).
 
@@ -77,11 +77,11 @@ Todos los endpoints básicos de consulta devuelven un estado `200 OK`. Los de cr
 - `POST /api/director`: Crear nuevo director.
 - `PATCH /api/director/:id`: Actualizar director por ID.
 
-### 🎭 Géneros (`/api/gender`)
-- `GET /api/gender`: Listar todos los géneros.
-- `GET /api/gender/:id`: Obtener género por ID.
-- `POST /api/gender`: Crear nuevo género.
-- `PATCH /api/gender/:id`: Actualizar género por ID.
+### 🎭 Géneros (`/api/genre`)
+- `GET /api/genre`: Listar todos los géneros.
+- `GET /api/genre/:id`: Obtener género por ID.
+- `POST /api/genre`: Crear nuevo género.
+- `PATCH /api/genre/:id`: Actualizar género por ID.
 
 ### 🏢 Productoras (`/api/producer`)
 - `GET /api/producer`: Listar todas las productoras.
