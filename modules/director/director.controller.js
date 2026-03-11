@@ -128,6 +128,31 @@ export const getDirectors = async (req, res) => {
     }
 }
 
+export const getActiveDirectors = async (req, res) => {
+    try {
+        const affectedRows = await getDirectorsModel(true);
+
+        if (affectedRows.length === 0 || affectedRows === undefined) {
+            return res.status(404).json({
+                message: "No se encontraron directores",
+                submit: false
+            });
+        }
+
+        res.status(201).json({
+            message: "Directores encontrados exitosamente",
+            affectedRows: affectedRows,
+            submit: true
+        });
+    } catch (error) {
+        console.error("Error al obtener los directores");
+        res.status(500).json({
+            message: "Error al obtener los directores",
+            submit: false
+        });
+    }
+}
+
 /**
  * Obtiene un director específico por su ID.
  * @async

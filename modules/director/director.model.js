@@ -62,10 +62,12 @@ export const existsActiveDirector = async (id) => {
  * Obtiene todos los directores de la base de datos
  * @returns {Array}
  */
-export const getDirectors = async () => {
+export const getDirectors = async (conditional = false) => {
     try {
+
+        const whereClause = 'WHERE state = TRUE'; // Solo obtener directores activos
         const [rows] = await pool.query(
-            'SELECT * FROM Director'
+            `SELECT * FROM Director ${conditional && whereClause}`
         );
 
         return rows;

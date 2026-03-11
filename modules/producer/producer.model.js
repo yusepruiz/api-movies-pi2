@@ -63,10 +63,11 @@ export const updateProducer = async (id, setClause, values) => {
  * Obtiene todos los productores de la base de datos
  * @returns {Array}
  */
-export const getProducers = async () => {
+export const getProducers = async (conditional = false) => {
     try {
+        const whereClause = 'WHERE state = TRUE'; // Solo obtener directores activos
         const [rows] = await pool.query(
-            'SELECT * FROM Producer'
+            `SELECT * FROM Producer ${conditional && whereClause}`
         );
 
         return rows;
