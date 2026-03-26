@@ -14,7 +14,7 @@ export const createType = async (req, res) => {
         const affectedRows = await createTypeModel(name, description);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se pudo crear el tipo de película",
                 submit: false
             });
@@ -121,7 +121,7 @@ export const getTypeById = async (req, res) => {
         const affectedRows = await getTypeByIdModel(id);
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontró el tipo de película",
                 submit: false
             });

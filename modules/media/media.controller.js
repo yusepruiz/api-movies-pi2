@@ -139,7 +139,7 @@ export const getMedia = async (req, res) => {
         const media = await getMediaModel();
 
         if (media === undefined || media.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontraron películas",
                 submit: false
             });
@@ -169,7 +169,7 @@ export const getMediaById = async (req, res) => {
         const affectedRows = await getMediaByIdModel(id);
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontró la película",
                 submit: false
             });

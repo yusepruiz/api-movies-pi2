@@ -21,7 +21,7 @@ export const createDirector = async (req, res) => {
         const affectedRows = await createDirectorModel(name, state);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "Director no creado",
                 submit: false
             });
@@ -144,7 +144,7 @@ export const getDirectorById = async (req, res) => {
         const affectedRows = await getDirectorByIdModel(id);
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontró el director",
                 submit: false
             });
