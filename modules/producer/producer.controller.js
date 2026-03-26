@@ -15,7 +15,7 @@ export const createProducer = async (req, res) => {
         const affectedRows = await createProducerModel(name, state, slogan, description);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: "No se pudo crear la productora",
                 submit: false
             });
@@ -56,7 +56,7 @@ export const updateProducer = async (req, res) => {
         const affectedRows = await updateProducerModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: "No se pudo actualizar la productora",
                 submit: false
             });

@@ -15,7 +15,7 @@ export const createGenre = async (req, res) => {
         const affectedRows = await createGenreModel(name, state, description);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: "No se pudo crear el género",
                 submit: false
             });
@@ -55,7 +55,7 @@ export const updateGenre = async (req, res) => {
         const affectedRows = await updateGenreModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(200).json({
+            return res.status(404).json({
                 message: "No se pudo actualizar el género",
                 submit: false
             });
