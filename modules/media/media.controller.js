@@ -64,16 +64,16 @@ export const updateMedia = async (req, res) => {
 
         // validations only if corresponding fields are present
         if (body.director_id !== undefined && !(await existsActiveDirector(body.director_id))) {
-            return res.status(400).json({ message: "Director inválido o inactivo" });
+            return res.status(200).json({ message: "Director inválido o inactivo" });
         }
         if (body.producer_id !== undefined && !(await existsActiveProducer(body.producer_id))) {
-            return res.status(400).json({ message: "Productora inválida o inactiva" });
+            return res.status(200).json({ message: "Productora inválida o inactiva" });
         }
         if (body.type_id !== undefined && !(await existsType(body.type_id))) {
-            return res.status(400).json({ message: "El tipo de película no existe" });
+            return res.status(200).json({ message: "El tipo de película no existe" });
         }
         if (body.genre_id !== undefined && !(await existsActiveGenre(body.genre_id))) {
-            return res.status(400).json({ message: "Género inválido o inactivo" });
+            return res.status(200).json({ message: "Género inválido o inactivo" });
         }
 
         const setClause = Object.keys(body).map(key => `${key} = ?`).join(', ');
@@ -110,7 +110,7 @@ export const deleteMedia = async (req, res) => {
         const affectedRows = await deleteMediaModel(id);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se pudo eliminar la película",
                 submit: false
             });

@@ -56,7 +56,7 @@ export const updateProducer = async (req, res) => {
         const affectedRows = await updateProducerModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se pudo actualizar la productora",
                 submit: false
             });
@@ -88,7 +88,7 @@ export const getProducers = async (req, res) => {
         const affectedRows = await getProducersModel();
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontraron productores",
                 submit: false
             });

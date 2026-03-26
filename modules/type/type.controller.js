@@ -55,7 +55,7 @@ export const updateType = async (req, res) => {
         const affectedRows = await updateTypeModel(id, setClause, values);
 
         if (affectedRows === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se pudo actualizar el tipo de película",
                 submit: false
             });
@@ -87,7 +87,7 @@ export const getTypes = async (req, res) => {
         const affectedRows = await getTypesModel();
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontraron tipos de películas",
                 submit: false
             });
