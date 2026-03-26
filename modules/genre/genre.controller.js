@@ -88,7 +88,7 @@ export const getGenres = async (req, res) => {
         const affectedRows = await getGenresModel();
 
         if (affectedRows.length === 0 || affectedRows === undefined) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message: "No se encontraron géneros",
                 submit: false
             });
